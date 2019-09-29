@@ -1,71 +1,59 @@
 import React from "react";
 import "./App.css";
+import addBars from "./components/bars/addBars";
 import PrettoSlider from "./components/pretto";
+
 class App extends React.Component {
+  //Not in use
   state = {
-    heightOfBars: [
-      { height: 130, isActive: false },
-      { height: 220, isActive: false },
-      { height: 120, isActive: false },
-      { height: 150, isActive: false },
-      { height: 80, isActive: false },
-      { height: 140, isActive: false },
-      { height: 20, isActive: false },
-      { height: 190, isActive: false },
-      { height: 135, isActive: false },
-      { height: 80, isActive: false }
+    barsList: [
+      { barHeight: 100, barColor: "beige", barOrder: 1 },
+      { barHeight: 80, barColor: "beige", barOrder: 2 },
+      { barHeight: 140, barColor: "beige", barOrder: 3 },
+      { barHeight: 120, barColor: "beige", barOrder: 4 }
     ],
-    numberOfElements: 30,
-    delay: 80
+    numberOfBars: 10
   };
 
-  handleChange = (event, newValue) => {
-    this.setState({ numberOfElements: newValue });
-    this.addelementsTolist();
-  };
-
-  divStyle = (height, isActive) => {
+  //Temporary
+  barStyle = (color, height, order) => {
     var h = height.toString() + "px";
-    if (isActive) {
-      return {
-        backgroundColor: "red",
-        borderBottomLeftRadius: "5px",
-        borderBottomRightRadius: "5px",
-        height: h,
-        fontSize: "8px",
-        marginRight: "7px",
-        flex: 1
-      };
-    }
     return {
-      backgroundColor: "#e0dda4",
+      backgroundColor: color,
+      height: h,
+      flex: 1,
+      marginLeft: "10px",
       borderBottomLeftRadius: "5px",
       borderBottomRightRadius: "5px",
-      height: h,
-      fontSize: "8px",
-      marginRight: "7px",
-      flex: 1
+      order: order,
+      fontSize: "0.8vw",
+      fontWeight: "200",
+      textAlign: "center"
     };
   };
 
   addBars = () => {
-    var barsList = [];
-
-    for (let i = 0; i < this.state.heightOfBars.length; i++) {
-      barsList.push(
+    var tempBarList = [];
+    for (let i = 0; i < this.state.barsList.length; i++) {
+      tempBarList.push(
         <div
-          className="bar"
-          style={this.divStyle(
-            this.state.heightOfBars[i]["height"],
-            this.state.heightOfBars[i]["isActive"]
+          className="Bar"
+          style={this.barStyle(
+            this.state.barsList[i]["barColor"],
+            this.state.barsList[i]["barHeight"],
+            this.state.barsList[i]["barOrder"]
           )}
-          key={i}
-        ></div>
+        >
+          {this.state.barsList[i]["barHeight"]}
+        </div>
       );
     }
-    return barsList;
+    return tempBarList;
   };
-
+  handleChange = (event, newValue) => {
+    this.setState({ numberOfBars: newValue });
+    this.addelementsTolist();
+  };
   getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -75,101 +63,35 @@ class App extends React.Component {
   addelementsTolist = () => {
     //less than 250 //more than 2
     var i = 0;
-    var element = 0;
-    var elementList = [];
-    while (i < this.state.numberOfElements) {
-      element = this.getRandomInt(10, 230);
-      elementList.push({ height: element, isActive: false });
+    var height = 0;
+    var tempBarList = [];
+    while (i < this.state.numberOfBars) {
+      height = this.getRandomInt(10, 230);
+      tempBarList.push({
+        barHeight: height,
+        barColor: "beige",
+        barOrder: i
+      });
       i = i + 1;
     }
     this.setState({
-      heightOfBars: elementList
+      barsList: tempBarList
     });
   };
-
-  changeColor = (newHeightOfBars, index, ans) => {
-    newHeightOfBars[index]["isActive"] = ans;
-    console.log(newHeightOfBars);
-  };
-
-  revertColorsBack = () => {
-    var list = this.state.heightOfBars;
-    for (var i = 0; i < list.length; i++) {
-      list[i]["isActive"] = false;
-    }
-    this.setState({
-      heightsOfBars: list
-    });
-  };
-
-  bubbleSort = async () => {
-    var items = this.state.heightOfBars;
-    var length = items.length;
-
-    var newHeightOfBars = this.state.heightOfBars;
-    for (var i = 0; i < length; i++) {
-      for (var j = 0; j < length - i - 1; j++) {
-        if (items[j]["height"] > items[j + 1]["height"]) {
-          this.changeColor(newHeightOfBars, j, true);
-          var tmp = items[j];
-          items[j] = items[j + 1];
-          items[j + 1] = tmp;
-        }
-        await this.timeout(this.state.delay);
-        this.changeColor(newHeightOfBars, j, false);
-        await this.timeout(this.state.delay);
-
-        this.setState({
-          heightsOfBars: items
-        });
-      }
-    }
-    this.revertColorsBack();
-  };
-  timeout = ms => {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  };
-  sleep = async () => {
-    await this.timeout(1000);
-  };
-
   render() {
     return (
       <div className="container-fluid">
         <div className="container1">{this.addBars()}</div>
         <div className="container2">
-          <div className="row1">
+          <div className="row">
             <PrettoSlider
               valueLabelDisplay="auto"
               aria-label="pretto slider"
-              defaultValue={30}
-              max="55"
+              defaultValue={10}
+              max="20"
               min="2"
               onChange={this.handleChange}
             />
-          </div>
-          <div className="row2">
-            <div className="btn btn-primary" onClick={this.bubbleSort}>
-              Sort
-            </div>
-          </div>
-          <div className="row3">
-            <div class="btn-group">
-              <button
-                class="btn btn-secondary btn-sm dropdown-toggle"
-                type="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Slow
-              </button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item">Medium</a>
-                <a class="dropdown-item">Fast</a>
-                <a class="dropdown-item">Very Fast</a>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -177,3 +99,7 @@ class App extends React.Component {
   }
 }
 export default App;
+
+{
+  /* <div className="container1">{addBars(this.state.numberOfBars)}</div> */
+}
