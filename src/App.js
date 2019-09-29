@@ -4,16 +4,15 @@ import addBars from "./components/bars/addBars";
 import PrettoSlider from "./components/pretto";
 
 class App extends React.Component {
-  //Not in use
   state = {
-    barsList: [
-      { barHeight: 100, barColor: "beige", barOrder: 1 },
-      { barHeight: 80, barColor: "beige", barOrder: 2 },
-      { barHeight: 140, barColor: "beige", barOrder: 3 },
-      { barHeight: 120, barColor: "beige", barOrder: 4 }
-    ],
-    numberOfBars: 10
+    barsList: [],
+    numberOfBars: 13
   };
+
+  componentWillMount() {
+    this.addelementsTolist();
+    this.addBars();
+  }
 
   //Temporary
   barStyle = (color, height, order) => {
@@ -78,6 +77,14 @@ class App extends React.Component {
       barsList: tempBarList
     });
   };
+
+  //await this.timeout(this.state.delay);
+  // timeout = ms => {
+  //   return new Promise(resolve => setTimeout(resolve, ms));
+  // };
+  // sleep = async () => {
+  //   await this.timeout(1000);
+  // };
   render() {
     return (
       <div className="container-fluid">
@@ -99,7 +106,3 @@ class App extends React.Component {
   }
 }
 export default App;
-
-{
-  /* <div className="container1">{addBars(this.state.numberOfBars)}</div> */
-}
