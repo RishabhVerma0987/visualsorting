@@ -2,12 +2,13 @@ import React from "react";
 import "./App.css";
 import addBars from "./components/bars/addBars";
 import PrettoSlider from "./components/pretto";
+import AnimateHeight from "react-animate-height";
 
 class App extends React.Component {
   state = {
     barsList: [],
     numberOfBars: 13,
-    delay: 100
+    delay: 1000
   };
 
   componentWillMount() {
@@ -16,7 +17,7 @@ class App extends React.Component {
   }
 
   //Temporary
-  barStyle = (color, height, order) => {
+  barStyle = (color, height) => {
     var h = height.toString() + "px";
     return {
       backgroundColor: color,
@@ -25,7 +26,6 @@ class App extends React.Component {
       marginLeft: "10px",
       borderBottomLeftRadius: "5px",
       borderBottomRightRadius: "5px",
-      order: order,
       fontSize: "0.8vw",
       fontWeight: "200",
       textAlign: "center"
@@ -36,16 +36,20 @@ class App extends React.Component {
     var tempBarList = [];
     for (let i = 0; i < this.state.barsList.length; i++) {
       tempBarList.push(
-        <div
-          className="Bar"
-          style={this.barStyle(
-            this.state.barsList[i]["barColor"],
-            this.state.barsList[i]["barHeight"]
-            // this.state.barsList[i]["barOrder"]
-          )}
+        <AnimateHeight
+          duration={500}
+          height={this.state.barsList[i]["barHeightToShow"]}
         >
-          {this.state.barsList[i]["barHeight"]}
-        </div>
+          <div
+            className="Bar"
+            style={this.barStyle(
+              this.state.barsList[i]["barColor"],
+              this.state.barsList[i]["barHeightToShow"]
+            )}
+          >
+            {this.state.barsList[i]["barHeightValue"]}
+          </div>
+        </AnimateHeight>
       );
     }
 
@@ -69,9 +73,9 @@ class App extends React.Component {
     while (i < this.state.numberOfBars) {
       height = this.getRandomInt(10, 230);
       tempBarList.push({
-        barHeight: height,
-        barColor: "beige"
-        // barOrder: i
+        barHeightToShow: height,
+        barColor: "beige",
+        barHeightValue: height
       });
       i = i + 1;
     }
@@ -94,13 +98,20 @@ class App extends React.Component {
     var length = items.length;
     for (var i = 0; i < length; i++) {
       for (var j = 0; j < length - i - 1; j++) {
-        if (items[j]["barHeight"] > items[j + 1]["barHeight"]) {
+        if (items[j]["barHeightValue"] > items[j + 1]["barHeightValue"]) {
           items = this.changeColor(items, j, "red");
           items = this.changeColor(items, j + 1, "red");
 
-          var tmp = items[j]["barHeight"];
-          items[j]["barHeight"] = items[j + 1]["barHeight"];
-          items[j + 1]["barHeight"] = tmp;
+          //Height Value
+          var tmp = items[j]["barHeightValue"];
+          items[j]["barHeightValue"] = items[j + 1]["barHeightValue"];
+          items[j + 1]["barHeightValue"] = tmp;
+
+          //Height Render (Here I have to Scale them)
+
+          var tmp = items[j]["barHeightToShow"];
+          items[j]["barHeightToShow"] = items[j + 1]["barHeightToShow"];
+          items[j + 1]["barHeightToShow"] = tmp;
         }
         await this.timeout(this.state.delay);
         items = this.changeColor(items, j, "beige");
@@ -124,9 +135,7 @@ class App extends React.Component {
   timeout = ms => {
     return new Promise(resolve => setTimeout(resolve, ms));
   };
-  // sleep = async () => {
-  //   await this.timeout(1000);
-  // };
+
   render() {
     console.log(this.state.barsList);
     return (

@@ -6,6 +6,7 @@
     "@material-ui/core": "^4.3.3",
     "react": "^16.9.0",
     "react-addons-css-transition-group": "^15.6.2",
+    "react-animate-height": "^2.0.15",
     "react-dom": "^16.9.0",
     "react-scripts": "3.1.1"
   },
