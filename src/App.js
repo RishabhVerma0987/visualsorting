@@ -6,7 +6,8 @@ import PrettoSlider from "./components/pretto";
 class App extends React.Component {
   state = {
     barsList: [],
-    numberOfBars: 13
+    numberOfBars: 13,
+    delay: 100
   };
 
   componentWillMount() {
@@ -39,14 +40,15 @@ class App extends React.Component {
           className="Bar"
           style={this.barStyle(
             this.state.barsList[i]["barColor"],
-            this.state.barsList[i]["barHeight"],
-            this.state.barsList[i]["barOrder"]
+            this.state.barsList[i]["barHeight"]
+            // this.state.barsList[i]["barOrder"]
           )}
         >
           {this.state.barsList[i]["barHeight"]}
         </div>
       );
     }
+
     return tempBarList;
   };
   handleChange = (event, newValue) => {
@@ -68,8 +70,8 @@ class App extends React.Component {
       height = this.getRandomInt(10, 230);
       tempBarList.push({
         barHeight: height,
-        barColor: "beige",
-        barOrder: i
+        barColor: "beige"
+        // barOrder: i
       });
       i = i + 1;
     }
@@ -78,14 +80,55 @@ class App extends React.Component {
     });
   };
 
-  //await this.timeout(this.state.delay);
-  // timeout = ms => {
-  //   return new Promise(resolve => setTimeout(resolve, ms));
-  // };
+  changeColor = (array, index, color) => {
+    array[index]["barColor"] = color;
+    this.setState({
+      barsList: array
+    });
+    return array;
+  };
+
+  //Bubble Sort
+  bubbleSort = async () => {
+    var items = this.state.barsList;
+    var length = items.length;
+    for (var i = 0; i < length; i++) {
+      for (var j = 0; j < length - i - 1; j++) {
+        if (items[j]["barHeight"] > items[j + 1]["barHeight"]) {
+          items = this.changeColor(items, j, "red");
+          items = this.changeColor(items, j + 1, "red");
+
+          var tmp = items[j]["barHeight"];
+          items[j]["barHeight"] = items[j + 1]["barHeight"];
+          items[j + 1]["barHeight"] = tmp;
+        }
+        await this.timeout(this.state.delay);
+        items = this.changeColor(items, j, "beige");
+        items = this.changeColor(items, j + 1, "green");
+
+        this.setState({
+          barsList: items
+        });
+      }
+    }
+    var items = this.state.barsList;
+    for (var i = 0; i < length; i++) {
+      items[i]["barColor"] = "beige";
+    }
+    this.setState({
+      barsList: items
+    });
+  };
+
+  // await this.timeout(this.state.delay);
+  timeout = ms => {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  };
   // sleep = async () => {
   //   await this.timeout(1000);
   // };
   render() {
+    console.log(this.state.barsList);
     return (
       <div className="container-fluid">
         <div className="container1">{this.addBars()}</div>
@@ -99,6 +142,9 @@ class App extends React.Component {
               min="2"
               onChange={this.handleChange}
             />
+            <button className="btn" onClick={this.bubbleSort}>
+              Press
+            </button>
           </div>
         </div>
       </div>
