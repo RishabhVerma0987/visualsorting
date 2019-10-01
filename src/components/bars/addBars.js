@@ -7,7 +7,7 @@ var barStyle = (color, height) => {
   return {
     backgroundColor: color,
     height: h,
-    width: "2vw",
+    width: "1.8vw",
     marginLeft: "10px",
     borderBottomLeftRadius: "4px",
     borderBottomRightRadius: "4px",

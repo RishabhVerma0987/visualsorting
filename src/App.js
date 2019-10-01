@@ -3,6 +3,7 @@ import "./App.css";
 import addBars from "./components/bars/addBars";
 import PrettoSlider from "./components/pretto";
 import { getRandomInt, timeout } from "./components/helperfunctions/helper";
+import { DropdownButton, Dropdown } from "react-bootstrap";
 
 class App extends React.Component {
   state = {
@@ -79,12 +80,18 @@ class App extends React.Component {
   };
 
   render() {
-    console.log(this.state.barsList);
     return (
       <div className="container-fluid">
         <div className="container1">{addBars(this.state.barsList)}</div>
         <div className="container2">
-          <div className="row">
+          {/* <div className="row justify-content-center slider">
+            <span className="sliderTitle">
+              Slide to add or delete bars,{" "}
+              <span class="badge badge-pill badge-success">
+                Currently{" "}
+                <span class="badge badge-light">{this.state.numberOfBars}</span>
+              </span>
+            </span>
             <PrettoSlider
               valueLabelDisplay="auto"
               aria-label="pretto slider"
@@ -93,8 +100,83 @@ class App extends React.Component {
               min="2"
               onChange={this.handleChange}
             />
-            <button className="btn" onClick={this.bubbleSort}>
-              Press
+          </div>
+          <div className="row">
+            <div className="col justify-content-center">
+              <DropdownButton
+                id="dropdown-item-button"
+                title="Sorting Technique"
+                size="sm"
+              >
+                <Dropdown.Item as="button">bubbleSort</Dropdown.Item>
+                <Dropdown.Item as="button">mergeSort</Dropdown.Item>
+                <Dropdown.Item as="button">QuickSort</Dropdown.Item>
+              </DropdownButton>
+            </div>
+            <div className="col justify-content-center">
+              <DropdownButton id="dropdown-item-button" title="Speed" size="sm">
+                <Dropdown.Item as="button">Slow</Dropdown.Item>
+                <Dropdown.Item as="button">Medium</Dropdown.Item>
+                <Dropdown.Item as="button">fast</Dropdown.Item>
+              </DropdownButton>
+            </div>
+          </div>
+          <div className="row justify-content-center ">
+            <button
+              type="button"
+              class="btn btn-warning btn-sm sort "
+              onClick={this.bubbleSort}
+            >
+              Sort
+            </button>
+          </div> */}
+          <div className="slider">
+            <span className="sliderTitle">
+              Slide to add or delete bars,{" "}
+              <span class="badge badge-pill badge-success">
+                Currently{" "}
+                <span class="badge badge-light">{this.state.numberOfBars}</span>
+              </span>
+            </span>
+            <PrettoSlider
+              className="slide"
+              valueLabelDisplay="auto"
+              aria-label="pretto slider"
+              defaultValue={10}
+              max="15"
+              min="2"
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="dropDowns">
+            <div className="sortingTechnique">
+              <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  Sorting Technique
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item as="button">bubbleSort</Dropdown.Item>
+                  <Dropdown.Item as="button">mergeSort</Dropdown.Item>
+                  <Dropdown.Item as="button">QuickSort</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
+            <div className="speedOfSorting">
+              <DropdownButton id="dropdown-item-button" title="Speed" size="sm">
+                <Dropdown.Item as="button">Slow</Dropdown.Item>
+                <Dropdown.Item as="button">Medium</Dropdown.Item>
+                <Dropdown.Item as="button">fast</Dropdown.Item>
+              </DropdownButton>
+            </div>
+          </div>
+          <div className="sortButton">
+            <button
+              type="button"
+              class="btn btn-warning btn-sm sort "
+              onClick={this.bubbleSort}
+            >
+              Sort
             </button>
           </div>
         </div>

@@ -29,11 +29,48 @@
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   flex-direction: column;
-  padding: 10px;
+  padding: 25px;
+  justify-content: center;
 }
 
-.container2 .row {
-  margin-left: 10px;
-  margin-top: 30px;
-  margin-right: 20px;
+.container2 .slider {
+  flex: 2;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 20px;
+}
+.container2 .slider .sliderTitle {
+  font-size: 10px;
+  color: azure;
+  font-family: "Roboto", sans-serif;
+}
+.container2 .slider .slide {
+  padding-top: 15px;
+}
+
+.container2 .dropDowns {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: -30px;
+}
+
+.container2 .dropDowns .sortingTechnique #dropdown-basic {
+  font-size: 10px;
+  background-color: cadetblue;
+  border: none;
+}
+
+.container2 .dropDowns .speedOfSorting #dropdown-item-button {
+  font-size: 10px;
+  background-color: burlywood;
+  border: none;
+}
+.container2 .sortButton {
+  flex: 1;
+  text-align: center;
+}
+.container2 .sortButton .btn {
+  font-size: 13px;
 }
