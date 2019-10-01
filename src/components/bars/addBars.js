@@ -1,20 +1,37 @@
 import React from "react";
-var barStyle = () => {
+import AnimateHeight from "react-animate-height";
+import "../../App.css";
+//Temporary
+var barStyle = (color, height) => {
+  var h = height.toString() + "px";
   return {
-    backgroundColor: "beige",
-    height: "100%",
-    flex: 1,
+    backgroundColor: color,
+    height: h,
+    width: "2vw",
     marginLeft: "10px",
-    borderBottomLeftRadius: "5px",
-    borderBottomRightRadius: "5px"
+    borderBottomLeftRadius: "4px",
+    borderBottomRightRadius: "4px",
+    fontSize: "0.7vw",
+    fontWeight: "200",
+    textAlign: "center"
   };
 };
 
-var addBars = numberOfBars => {
-  var barList = [];
-  for (var i = 0; i < numberOfBars; i++) {
-    barList.push(<div className="Bar" style={barStyle()}></div>);
+var addBars = barsList => {
+  var tempBarList = [];
+  for (let i = 0; i < barsList.length; i++) {
+    tempBarList.push(
+      <AnimateHeight duration={500} height={barsList[i]["barHeight"]}>
+        <div
+          className="Bar"
+          style={barStyle(barsList[i]["barColor"], barsList[i]["barHeight"])}
+        >
+          {barsList[i]["barHeight"]}
+        </div>
+      </AnimateHeight>
+    );
   }
-  return barList;
+  return tempBarList;
 };
+
 export default addBars;

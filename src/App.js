@@ -2,80 +2,34 @@ import React from "react";
 import "./App.css";
 import addBars from "./components/bars/addBars";
 import PrettoSlider from "./components/pretto";
-import AnimateHeight from "react-animate-height";
+import { getRandomInt, timeout } from "./components/helperfunctions/helper";
 
 class App extends React.Component {
   state = {
     barsList: [],
     numberOfBars: 13,
-    delay: 1000
+    delay: 400
   };
 
   componentWillMount() {
     this.addelementsTolist();
-    this.addBars();
+    addBars(this.state.barsList);
   }
 
-  //Temporary
-  barStyle = (color, height) => {
-    var h = height.toString() + "px";
-    return {
-      backgroundColor: color,
-      height: h,
-      flex: 1,
-      marginLeft: "10px",
-      borderBottomLeftRadius: "5px",
-      borderBottomRightRadius: "5px",
-      fontSize: "0.8vw",
-      fontWeight: "200",
-      textAlign: "center"
-    };
-  };
-
-  addBars = () => {
-    var tempBarList = [];
-    for (let i = 0; i < this.state.barsList.length; i++) {
-      tempBarList.push(
-        <AnimateHeight
-          duration={500}
-          height={this.state.barsList[i]["barHeightToShow"]}
-        >
-          <div
-            className="Bar"
-            style={this.barStyle(
-              this.state.barsList[i]["barColor"],
-              this.state.barsList[i]["barHeightToShow"]
-            )}
-          >
-            {this.state.barsList[i]["barHeightValue"]}
-          </div>
-        </AnimateHeight>
-      );
-    }
-
-    return tempBarList;
-  };
   handleChange = (event, newValue) => {
     this.setState({ numberOfBars: newValue });
     this.addelementsTolist();
   };
-  getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-  }
 
   addelementsTolist = () => {
-    //less than 250 //more than 2
     var i = 0;
     var height = 0;
     var tempBarList = [];
     while (i < this.state.numberOfBars) {
-      height = this.getRandomInt(10, 230);
+      height = getRandomInt(10, 230);
       tempBarList.push({
-        barHeightToShow: height,
-        barColor: "beige",
-        barHeightValue: height
+        barHeight: height,
+        barColor: "beige"
       });
       i = i + 1;
     }
@@ -98,24 +52,17 @@ class App extends React.Component {
     var length = items.length;
     for (var i = 0; i < length; i++) {
       for (var j = 0; j < length - i - 1; j++) {
-        if (items[j]["barHeightValue"] > items[j + 1]["barHeightValue"]) {
-          items = this.changeColor(items, j, "red");
-          items = this.changeColor(items, j + 1, "red");
+        if (items[j]["barHeight"] > items[j + 1]["barHeight"]) {
+          items = this.changeColor(items, j, "#91d3e3");
+          items = this.changeColor(items, j + 1, "#91d3e3");
 
-          //Height Value
-          var tmp = items[j]["barHeightValue"];
-          items[j]["barHeightValue"] = items[j + 1]["barHeightValue"];
-          items[j + 1]["barHeightValue"] = tmp;
-
-          //Height Render (Here I have to Scale them)
-
-          var tmp = items[j]["barHeightToShow"];
-          items[j]["barHeightToShow"] = items[j + 1]["barHeightToShow"];
-          items[j + 1]["barHeightToShow"] = tmp;
+          var tmp = items[j]["barHeight"];
+          items[j]["barHeight"] = items[j + 1]["barHeight"];
+          items[j + 1]["barHeight"] = tmp;
         }
-        await this.timeout(this.state.delay);
+        await timeout(this.state.delay);
         items = this.changeColor(items, j, "beige");
-        items = this.changeColor(items, j + 1, "green");
+        items = this.changeColor(items, j + 1, "#91e395");
 
         this.setState({
           barsList: items
@@ -131,23 +78,18 @@ class App extends React.Component {
     });
   };
 
-  // await this.timeout(this.state.delay);
-  timeout = ms => {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  };
-
   render() {
     console.log(this.state.barsList);
     return (
       <div className="container-fluid">
-        <div className="container1">{this.addBars()}</div>
+        <div className="container1">{addBars(this.state.barsList)}</div>
         <div className="container2">
           <div className="row">
             <PrettoSlider
               valueLabelDisplay="auto"
               aria-label="pretto slider"
               defaultValue={10}
-              max="20"
+              max="15"
               min="2"
               onChange={this.handleChange}
             />
