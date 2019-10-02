@@ -1,11 +1,49 @@
 import React, { Component } from "react";
 
 import PrettoSlider from "./pretto";
-import { DropdownButton, Dropdown } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 class SortingPlate extends Component {
+  state = {
+    currentAlgo: "BubbleSort",
+    delay: 400
+  };
+  onChange = () => {
+    this.props.onChangeAlgo(this.state.currentAlgo);
+  };
+
+  onChangeSpeed = () => {
+    this.props.onChangeSpeed(this.state.delay);
+  };
+  changeAlogFromDropDown = algo => {
+    this.setState(
+      {
+        currentAlgo: algo
+      },
+      this.onChange
+    );
+  };
+
+  changeDelay = delay => {
+    this.setState(
+      {
+        delay: delay
+      },
+      this.onChangeSpeed
+    );
+  };
+
+  showSpeed = () => {
+    if (this.state.delay === 600) {
+      return "Slow";
+    } else if (this.state.delay === 400) {
+      return "Medium";
+    } else {
+      return "Fast";
+    }
+  };
   render() {
     return (
-      <div className="container-fluid">
+      <div className="container-plate">
         <div className="container1">{this.props.addBars}</div>
         <div className="container2">
           <div className="slider">
@@ -30,22 +68,53 @@ class SortingPlate extends Component {
             <div className="sortingTechnique">
               <Dropdown>
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  Sorting Technique
+                  {this.state.currentAlgo}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  <Dropdown.Item as="button">bubbleSort</Dropdown.Item>
-                  <Dropdown.Item as="button">mergeSort</Dropdown.Item>
-                  <Dropdown.Item as="button">QuickSort</Dropdown.Item>
+                  <Dropdown.Item
+                    as="button"
+                    //if you want to pass info from a button use arrow func inside onClick/onSelect VERY IMPORTTANT
+                    onClick={() => this.changeAlogFromDropDown("BubbleSort")}
+                  >
+                    BubbleSort
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    as="button"
+                    onClick={() => this.changeAlogFromDropDown("QuickSort")}
+                  >
+                    QuickSort
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </div>
             <div className="speedOfSorting">
-              <DropdownButton id="dropdown-item-button" title="Speed" size="sm">
-                <Dropdown.Item as="button">Slow</Dropdown.Item>
-                <Dropdown.Item as="button">Medium</Dropdown.Item>
-                <Dropdown.Item as="button">fast</Dropdown.Item>
-              </DropdownButton>
+              <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  {this.showSpeed()}
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item
+                    as="button"
+                    onClick={() => this.changeDelay(600)}
+                  >
+                    Slow
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    as="button"
+                    onClick={() => this.changeDelay(400)}
+                  >
+                    Medium
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    as="button"
+                    onClick={() => this.changeDelay(200)}
+                  >
+                    Fast
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </div>
           </div>
           <div className="sortButton">
