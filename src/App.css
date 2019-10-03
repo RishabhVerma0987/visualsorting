@@ -1,8 +1,17 @@
-.container-fluid {
+.container-fluid .row .heading {
+  color: antiquewhite;
+  font-size: 3.5em;
+  margin-top: 2vh;
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 3px;
+  font-weight: 300;
+  text-decoration-line: underline;
+}
+
+.container-plate {
   height: 250px;
   width: 80%;
-  margin: 0 auto;
-  margin-top: 15%;
+  margin-top: 5%;
   display: flex;
 }
 
@@ -14,10 +23,12 @@
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   padding: 10px;
   padding-top: 0px;
-  flex-direction: row-reverse;
+  padding-right: 20px;
+
+  /* flex-direction: row-reverse; */
 }
 .container2 {
   flex: 1;
@@ -28,23 +39,54 @@
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   flex-direction: column;
-  padding: 20px;
-}
-.container2 .row1 {
-  flex: 1;
-}
-.container2 .row2 {
-  flex: 1;
-  margin: 0 auto;
-}
-.container2 .row3 {
-  flex: 1;
-  margin: 0 auto;
+  padding: 25px;
+  justify-content: center;
 }
 
-.container2 .row3 .dropdown-item {
-  font-size: 10px;
+.container2 .slider {
+  flex: 2;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 20px;
 }
-.container2 .row3 .dropdown-menu {
-  background-color: #dea8e6;
+.container2 .slider .sliderTitle {
+  font-size: 10px;
+  color: azure;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+}
+.container2 .slider .slide {
+  padding-top: 15px;
+}
+
+.container2 .dropDowns {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: -30px;
+}
+
+.container2 .dropDowns .sortingTechnique #dropdown-basic {
+  flex: 1;
+  font-size: 10px;
+  background-color: cadetblue;
+  border: none;
+  font-weight: 300;
+}
+
+.container2 .dropDowns .speedOfSorting #dropdown-basic {
+  flex: 1;
+  font-size: 10px;
+  background-color: burlywood;
+  border: none;
+  margin-left: 10px;
+  font-weight: 300;
+}
+.container2 .sortButton {
+  flex: 1;
+  text-align: center;
+}
+.container2 .sortButton .btn {
+  font-size: 13px;
 }
