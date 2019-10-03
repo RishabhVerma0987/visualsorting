@@ -90,6 +90,8 @@ class App extends React.Component {
       deactivate: false
     });
   };
+
+  //QuickSort
   quickChangeColor = (index, color) => {
     var array = this.state.barsList;
     array[index]["barColor"] = color;
@@ -167,12 +169,116 @@ class App extends React.Component {
     });
   };
 
+  // merge = async (left, right) => {
+  //   //color left and right to red
+  //   var indexLeft = 0;
+  //   var indexRight = 0;
+  //   for (var i = 0; i < this.state.barsList.length; i++) {
+  //     if (this.state.barsList[i] === left[0]) {
+  //       indexLeft = i;
+  //       break;
+  //     }
+  //   }
+  //   for (var i = 0; i < this.state.barsList.length; i++) {
+  //     if (this.state.barsList[i] === right[0]) {
+  //       indexRight = i;
+  //       break;
+  //     }
+  //   }
+  //   for (let i = indexLeft; i < this.state.barsList.length; i++) {
+  //     this.quickChangeColor(i, "red");
+  //   }
+  //   for (let i = indexRight; i < this.state.barsList.length; i++) {
+  //     this.quickChangeColor(i, "blue");
+  //   }
+  //   await timeout(500);
+
+  //   let resultArray = [],
+  //     leftIndex = 0,
+  //     rightIndex = 0;
+
+  //   while (leftIndex < left.length && rightIndex < right.length) {
+  //     if (left[leftIndex]["barHeight"] < right[rightIndex]["barHeight"]) {
+  //       resultArray.push(left[leftIndex]);
+  //       leftIndex++;
+  //     } else {
+  //       resultArray.push(right[rightIndex]);
+  //       rightIndex++;
+  //     }
+  //   }
+
+  //   for (i = 0; i < this.state.barsList.length; i++) {
+  //     this.quickChangeColor(i, "beige");
+  //   }
+  //   await timeout(200);
+  //   return resultArray
+  //     .concat(left.slice(leftIndex))
+  //     .concat(right.slice(rightIndex));
+  // };
+
+  // mergeSort = async unsortedArray => {
+  //   if (unsortedArray.length <= 1) {
+  //     return unsortedArray;
+  //   }
+  //   const middle = Math.floor(unsortedArray.length / 2);
+  //   const left = unsortedArray.slice(0, middle);
+  //   const right = unsortedArray.slice(middle);
+  //   return await this.merge(
+  //     await this.mergeSort(left),
+  //     await this.mergeSort(right)
+  //   );
+  // };
+
+  // renderMergeSort = async () => {
+  //   var sortedArray = await this.mergeSort(this.state.barsList);
+  //   this.setState({
+  //     barsList: sortedArray
+  //   });
+  // };
+  insertionSort = async () => {
+    var inputArr = this.state.barsList;
+    let length = inputArr.length;
+    this.setState({
+      deactivate: true
+    });
+    for (let i = 1; i < length; i++) {
+      let key = inputArr[i];
+      this.quickChangeColor(this.state.barsList.indexOf(key), "#5c5c5c");
+      await timeout(this.state.delay);
+      let j = i - 1;
+      while (j >= 0 && inputArr[j]["barHeight"] > key["barHeight"]) {
+        inputArr[j + 1] = inputArr[j];
+        this.quickChangeColor(j + 1, "#91d3e3");
+        this.setState({
+          barsList: inputArr
+        });
+        await timeout(this.state.delay);
+        this.quickChangeColor(j + 1, "beige");
+        await timeout(this.state.delay);
+        j = j - 1;
+      }
+      inputArr[j + 1] = key;
+      this.quickChangeColor(j + 1, "#91e395");
+    }
+    var items = this.state.barsList;
+    for (var i = 0; i < items.length; i++) {
+      items[i]["barColor"] = "beige";
+    }
+    this.setState({
+      barsList: items
+    });
+    this.setState({
+      deactivate: false
+    });
+  };
   sorting = () => {
     if (!this.state.deactivate) {
       if (this.state.currentChosenSortingAlgo === "BubbleSort") {
         return this.bubbleSort;
       } else if (this.state.currentChosenSortingAlgo === "QuickSort") {
         return this.renderQuickSort;
+      } else if (this.state.currentChosenSortingAlgo === "InsertionSort") {
+        return this.insertionSort;
       }
     } else {
       return null;

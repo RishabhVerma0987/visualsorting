@@ -85,6 +85,12 @@ class SortingPlate extends Component {
                   >
                     QuickSort
                   </Dropdown.Item>
+                  <Dropdown.Item
+                    as="button"
+                    onClick={() => this.changeAlogFromDropDown("InsertionSort")}
+                  >
+                    InsertionSort
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </div>
