@@ -49,9 +49,11 @@ class SortingPlate extends Component {
           <div className="slider">
             <span className="sliderTitle">
               Slide to add or delete bars,{" "}
-              <span class="badge badge-pill badge-success">
+              <span className="badge badge-pill badge-success">
                 Currently{" "}
-                <span class="badge badge-light">{this.props.numberOfBars}</span>
+                <span className="badge badge-light">
+                  {this.props.numberOfBars}
+                </span>
               </span>
             </span>
             <PrettoSlider
@@ -126,7 +128,7 @@ class SortingPlate extends Component {
           <div className="sortButton">
             <button
               type="button"
-              class="btn btn-warning btn-sm sort "
+              className="btn btn-warning btn-sm sort "
               onClick={this.props.Sort}
             >
               Sort

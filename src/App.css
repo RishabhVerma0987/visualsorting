@@ -11,7 +11,7 @@
 .container-plate {
   height: 60vh;
   width: 80%;
-  margin-top: 5%;
+  margin-top: 3.5%;
   display: flex;
 }
 
@@ -91,4 +91,15 @@
   font-size: 25px;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
+}
+.githubLink {
+  color: #5f6dac;
+  float: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+}
+a:hover {
+  text-decoration: none;
+  color: aliceblue;
 }

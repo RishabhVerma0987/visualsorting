@@ -16,7 +16,7 @@ class App extends React.Component {
     deactivate: false
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.addelementsTolist();
     addBars(this.state.barsList);
   }
@@ -292,6 +292,16 @@ class App extends React.Component {
           <div className="heading">
             <Heading />
           </div>
+        </div>
+        <div className="row justify-content-center">
+          <a
+            href="https://github.com/RishabhVerma098/visualsorting"
+            className="githubLink"
+            target="_blank"
+            rel="noopener"
+          >
+            <i className="fab fa-github"></i> Github Repo {"</>"}
+          </a>
         </div>
         <div className="row justify-content-center">
           <SortingPlate

@@ -25,6 +25,7 @@ var addBars = barsList => {
         <div
           className="Bar"
           style={barStyle(barsList[i]["barColor"], barsList[i]["barHeight"])}
+          key={i}
         >
           {barsList[i]["barHeight"]}
         </div>
