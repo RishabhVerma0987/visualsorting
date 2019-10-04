@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.3.3",
     "bootstrap": "^4.3.1",
+    "gh-pages": "^2.1.1",
     "react": "^16.9.0",
     "react-addons-css-transition-group": "^15.6.2",
     "react-animate-height": "^2.0.15",
@@ -14,11 +15,13 @@
     "react-typist": "^2.0.5",
     "typewriter-effect": "^2.12.1"
   },
+  "homepage": "https://RishabhVerma098.github.io/visualsorting",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
