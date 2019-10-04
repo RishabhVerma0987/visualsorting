@@ -33,7 +33,7 @@ class App extends React.Component {
     var height = 0;
     var tempBarList = [];
     while (i < this.state.numberOfBars) {
-      height = getRandomInt(10, 230);
+      height = getRandomInt(20, 380);
       tempBarList.push({
         barHeight: height,
         barColor: "beige"
@@ -303,7 +303,6 @@ class App extends React.Component {
             onChangeAlgo={this.onChangeAlgo}
             onChangeSpeed={this.onChangeSpeed}
           />
-          hey!!
         </div>
       </div>
     );

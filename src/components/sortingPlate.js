@@ -59,7 +59,7 @@ class SortingPlate extends Component {
               valueLabelDisplay="auto"
               aria-label="pretto slider"
               defaultValue={10}
-              max="15"
+              max="18"
               min="2"
               onChange={this.props.slider}
             />
