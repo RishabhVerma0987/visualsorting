@@ -43,6 +43,46 @@
   justify-content: center;
 }
 
+.container-bst-plate {
+  /* height: 60vh;
+  width: 80%;
+  position: fixed;
+  top: 25%;
+  left: 12%; */
+  height: 60vh;
+  width: 1225px;
+  margin-top: 3.5%;
+  display: flex;
+  /*temporary*/
+  position: fixed;
+  top: 15%;
+  left: 10%;
+}
+
+.container-plate1 {
+  background-color: #f7b42c;
+  background-image: linear-gradient(315deg, #f7b42c 0%, #fc575e 74%);
+  height: 100%;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding: 10px;
+  padding-top: 0px;
+  padding-right: 15px;
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-plate2 {
+  background-color: #463657;
+  background-image: linear-gradient(315deg, #53475f 0%, #5f6dac 74%);
+  height: 100%;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 40px;
+  flex: 1;
+}
+
 .container2 .slider {
   flex: 2;
   padding-left: 10px;
@@ -102,4 +142,38 @@
 a:hover {
   text-decoration: none;
   color: aliceblue;
+}
+
+.Node {
+  width: 50px;
+  height: 50px;
+  background-color: red;
+  border-radius: 100%;
+  margin-top: 40px;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 30px;
+  color: aliceblue;
+  padding-top: 2px;
+  padding-right: 2px;
+}
+
+.depth1 {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  margin-top: -30px;
+}
+
+.depth2 {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  margin-top: -10px;
+}
+.root {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  margin-top: 35px;
 }
