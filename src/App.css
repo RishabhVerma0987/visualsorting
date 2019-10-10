@@ -9,10 +9,35 @@
 }
 
 .container-plate {
-  height: 60vh;
-  width: 80%;
-  margin-top: 3.5%;
+  /* height: 60vh;
+  width: 80%; */
+  height: 440px;
+  width: 1220px;
+  margin-top: 1%;
   display: flex;
+  animation-name: slideInFromLeft;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+}
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-20%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(-20%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .container1 {
@@ -44,19 +69,13 @@
 }
 
 .container-bst-plate {
-  /* height: 60vh;
-  width: 80%;
-  position: fixed;
-  top: 25%;
-  left: 12%; */
-  height: 60vh;
-  width: 1225px;
-  margin-top: 3.5%;
+  height: 440px;
+  width: 1220px;
+  margin-top: 1%;
   display: flex;
-  /*temporary*/
-  position: fixed;
-  top: 15%;
-  left: 10%;
+  animation-name: slideInFromRight;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
 }
 
 .container-plate1 {
@@ -184,4 +203,10 @@ a:hover {
 .container-plate2 .input-group {
   width: 50%;
   margin-left: 25%;
+}
+
+@media only screen and (max-width: 1250px) {
+  .connector {
+    display: none;
+  }
 }

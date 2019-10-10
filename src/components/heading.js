@@ -8,7 +8,7 @@ class Heading extends Component {
         <span className="visualsorting">
           <Typewriter
             options={{
-              strings: ["Visual Sorting ..."],
+              strings: ["Visual Algo's ..."],
               autoStart: true,
               loop: true,
               delay: 200
