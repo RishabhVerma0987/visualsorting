@@ -6,6 +6,7 @@ import { getRandomInt, timeout } from "./components/helperfunctions/helper";
 
 import SortingPlate from "./components/sortingPlate";
 import Heading from "./components/heading";
+import BSTPlate from "./components/BSTPlate";
 
 class App extends React.Component {
   state = {
@@ -13,7 +14,8 @@ class App extends React.Component {
     numberOfBars: 13,
     delay: 400,
     currentChosenSortingAlgo: "BubbleSort",
-    deactivate: false
+    deactivate: false,
+    ds: "sorting"
   };
 
   componentDidMount() {
@@ -303,16 +305,55 @@ class App extends React.Component {
             <i className="fab fa-github"></i> Github Repo {"</>"}
           </a>
         </div>
-        <div className="row justify-content-center">
-          <SortingPlate
-            numberOfBars={this.state.numberOfBars}
-            addBars={addBars(this.state.barsList)}
-            barsList={this.state.barsList}
-            slider={this.handleChange}
-            Sort={this.sorting()}
-            onChangeAlgo={this.onChangeAlgo}
-            onChangeSpeed={this.onChangeSpeed}
-          />
+        <div className="row " style={{ marginTop: "10px", marginLeft: "10%" }}>
+          <button
+            type="button"
+            class={
+              this.state.ds === "sorting"
+                ? "btn btn-warning btn-sm"
+                : "btn btn-outline-warning btn-sm"
+            }
+            onClick={() =>
+              this.setState({
+                ds: "sorting"
+              })
+            }
+            style={{ borderRadius: "15px" }}
+          >
+            Sorting
+          </button>
+
+          <button
+            type="button"
+            class={
+              this.state.ds === "tree"
+                ? "btn btn-info btn-sm"
+                : "btn btn-outline-info btn-sm"
+            }
+            style={{ marginLeft: "10px", borderRadius: "15px" }}
+            onClick={() =>
+              this.setState({
+                ds: "tree"
+              })
+            }
+          >
+            Binary Search Tress
+          </button>
+        </div>
+        <div className="row justify-content-center ">
+          {this.state.ds === "sorting" ? (
+            <SortingPlate
+              numberOfBars={this.state.numberOfBars}
+              addBars={addBars(this.state.barsList)}
+              barsList={this.state.barsList}
+              slider={this.handleChange}
+              Sort={this.sorting()}
+              onChangeAlgo={this.onChangeAlgo}
+              onChangeSpeed={this.onChangeSpeed}
+            />
+          ) : (
+            <BSTPlate />
+          )}
         </div>
       </div>
     );
